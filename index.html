@@ -52,53 +52,6 @@
     }
     
     </style>
-    <script>
-      if (
-        localStorage.theme === 'dark' ||
-        (!('theme' in localStorage) &&
-          globalThis.matchMedia('(prefers-color-scheme: dark)').matches)
-      ) {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-      <!-- Typewriter effect JavaScript -->
-      document.addEventListener('DOMContentLoaded', function() {
-      const text = "Fadly Febro Surya Pratama"; // Teks yang ingin ditampilkan
-      let index = 0;
-      const typewriter = document.getElementById('typewriter');
-
-      function typeEffect() {
-        if (index < text.length) {
-          typewriter.innerHTML += text.charAt(index);
-          index++;
-          setTimeout(typeEffect, 150); // Kecepatan typing effect (150ms)
-        } else {
-          // Setelah selesai mengetik, mulai menghapus
-          setTimeout(deleteEffect, 1000); // Tunggu 1 detik sebelum mulai menghapus
-        }
-      }
-
-      function deleteEffect() {
-        if (index > 0) {
-          typewriter.innerHTML = typewriter.innerHTML.slice(0, -1); // Menghapus karakter terakhir
-          index--;
-          setTimeout(deleteEffect, 100); // Kecepatan menghapus effect (100ms)
-        } else {
-          // Setelah menghapus, mulai lagi dari awal
-          index = 0;
-          setTimeout(typeEffect, 500); // Tunggu sebelum mulai mengetik lagi
-        }
-      }
-
-      typeEffect(); // Mulai efek typewriter
-    });
-    // Hide loading screen after page loads
-    window.onload = function () {
-      const loadingScreen = document.getElementById('loading-screen');
-      loadingScreen.style.display = 'none'; // Hide loading screen after page loads
-    };
-    </script>
   </head>
   <body>
     <!-- Header Start -->

@@ -71,7 +71,7 @@ if (
   document.documentElement.classList.remove("dark");
 }
 document.addEventListener("DOMContentLoaded", function () {
-  const text = "Fadly Febro Surya Pratama"; // Teks yang ingin ditampilkan
+  const text = "Fadly Febro Surya Pratama";
   let index = 0;
   const typewriter = document.getElementById("typewriter");
 
