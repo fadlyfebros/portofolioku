@@ -136,7 +136,7 @@
                   <div class="flex">
                     <span class="mr-2 text-sm text-slate-500">light</span>
                     <input type="checkbox" class="hidden" id="dark-toggle" />
-                    <label for="dark-toggle"> toggl
+                    <label for="dark-toggle">
                       <div class="flex h-5 w-9 cursor-pointer items-center rounded-full bg-slate-500 p-1">
                         <div class="toggle-circle h-4 w-4 rounded-full bg-white transition duration-300 ease-in-out"></div>
                       </div>
@@ -438,43 +438,48 @@
           <div class="max-w-xl mx-auto text-center">
             <h4 class="mb-3 text-lg font-bold uppercase text-primary">Contact</h4>
             <h2 class="mb-5 text-3xl font-bold text-dark dark:text-white">Hubungi Saya</h2>
-            <p class="mb-6 text-base font-medium text-secondary">Isi form di bawah ini untuk mengirim pesan.</p>
+            <p class="mb-6 text-base font-medium text-secondary">
+              Isi form di bawah ini untuk mengirim pesan.
+            </p>
           </div>
         </div>
+
         <div class="w-full lg:w-2/3 lg:mx-auto">
-          <form id="contact-form" method="POST" class="w-full">
+          <form id="contact-form" class="w-full">
             <div class="mb-5">
               <label class="block text-base text-primary">
                 Nama
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  class="w-full p-3 rounded-lg border border-slate-300"
-                  required
-                />
+                <input type="text" id="name" class="w-full p-3 rounded-lg border border-slate-300" required />
               </label>
-              <input type="text" id="name" name="name" class="w-full p-3 rounded-lg border border-slate-300" required>
             </div>
+
             <div class="mb-5">
-              <label for="email" class="text-base text-primary">Email</label>
-              <input type="email" id="email" name="email" class="w-full p-3 rounded-lg border border-slate-300" required>
+              <label class="text-base text-primary">Email</label>
+              <input type="email" id="email" class="w-full p-3 rounded-lg border border-slate-300" required />
             </div>
+
             <div class="mb-5">
-              <label for="subject" class="text-base text-primary">Subjek</label>
-              <input type="text" id="subject" name="subject" class="w-full p-3 rounded-lg border border-slate-300" required>
+              <label class="text-base text-primary">Subjek</label>
+              <input type="text" id="subject" class="w-full p-3 rounded-lg border border-slate-300" required />
             </div>
+
             <div class="mb-5">
-              <label for="message" class="text-base text-primary">Pesan</label>
-              <textarea id="message" name="message" class="w-full p-3 rounded-lg border border-slate-300" rows="5" required></textarea>
+              <label class="text-base text-primary">Pesan</label>
+              <textarea id="message" class="w-full p-3 rounded-lg border border-slate-300" rows="5" required></textarea>
             </div>
+
             <div class="text-center">
-              <button onclick="sendMail()" class="rounded-full bg-primary py-3 px-8 text-base font-semibold text-white transition duration-300 ease-in-out hover:opacity-80 hover:shadow-lg">Kirim Pesan</button>
+              <button
+                type="submit"
+                class="rounded-full bg-primary py-3 px-8 text-base font-semibold text-white transition duration-300 hover:opacity-80 hover:shadow-lg"
+              >
+                Kirim Pesan
+              </button>
             </div>
           </form>
         </div>
       </div>
-    </section>  
+    </section>
     <!-- Contact Section End -->
 
     <!-- Footer Start -->
@@ -608,27 +613,46 @@
     </a>
     <!-- Back to top End -->
     <script src="dist/js/script.js"></script>
+    <!-- EmailJS library PERTAMA -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Baru script kamu -->
     <script>
-        function sendMail() {
-          (function(){
-            emailjs.init("hDVZr3ycr3ANSoi59");
-          })();
+      (function () {
+        emailjs.init("hDVZr3ycr3ANSoi59");
+      })();
 
-          var serviceID = "service_u5u7pbg";
-          var templateID = "template_x5aunfb";
-          var params = {
-            sendername: document.querySelector("#name").Value,
-            senderemail: document.querySelector("#email").Value,
-            subject: document.querySelector("#subject").Value,
-            message: document.querySelector("#message").Value,
-          };
+      const form = document.getElementById("contact-form");
 
-          emailjs.send(serviceID, templateID, params)
-          .then( res => {
-            alert('Thank you, ' + params['sendername'] + '! Your message has been sent');
+      form.addEventListener("submit", function (e) {
+        e.preventDefault(); // ⛔ PENTING
+
+        const params = {
+          sendername: document.getElementById("name").value,
+          senderemail: document.getElementById("email").value,
+          subject: document.getElementById("subject").value,
+          message: document.getElementById("message").value,
+        };
+
+        emailjs
+          .send("service_zrpz2um", "template_mp0g4n9", params)
+          .then(() => {
+            Swal.fire({
+              icon: "success",
+              title: "Berhasil 🎉",
+              text: "Pesan berhasil dikirim ke Gmail kamu",
+              showConfirmButton: false,
+              timer: 2500,
+            });
+
+            form.reset();
           })
-          .catch();
-        }
+          .catch((error) => {
+            console.error("EmailJS Error:", error);
+            alert("Gagal mengirim pesan ❌");
+          });
+      });
     </script>
   </body>
 </html>
